@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+/* 给4个块设置背景色 */
+.color1
+{
+	background-color:#f0c0c0;
+}
+.color2
+{
+	background-color:#f0f080;
+}
+.color3
+{
+	background-color:#f0f080;
+}
+.color4
+{
+	background-color:#e0e0e0;
+}
+
+.title {
+  font color: blue;
+  width: 100;
+}
+
+/*
+.wrap{
+    width: 30%; //设置需要固定的宽度
+    white-space: nowrap; //不换行
+    text-overflow: ellipsis; //超出部分用....代替
+    overflow: hidden; //超出隐藏
+}
+*/
+
+/* 创建二个相等的列 */
+.column {
+  float: left;
+  width: 40%;
+  margin-left:5%;
+}
+
+/* 列后清除浮动 */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 响应式布局 - 小于 600 px 时改为上下布局 */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+
+
+</style>
+
+<!-- /* 第1行 */    -->
+<div class="row">
+<!-- /* 第1行，第1列 */    -->
+<div class="column color1">
+    <h2><center>Important, Urgent</center></h2>
+<table border="1">
+    <tr>
+    <td width=280><b>Task Title</b></td>
+    <td width=540><b>Discription</b></td>
+    <td width=120>
+        <b>Deal method</b>
+        <div class="wrap">
+            <a href="{{url_for('new')}}">
+                <span class="badge badge-info">New</span>
+            </a>
+        </div>
+    </td>
+    </tr>
+
+    {% for post in tuple_a[0] %}
+    <tr>
+        <td class="blue">
+            <div class="wrap">
+                <b> <font color="blue"> {{ post['title'] }}</font></b>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                {{ post['content'] }}
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <a href="{{url_for('edit', id=post['id'])}}">
+                   <span class="badge badge-warning">Update</span>
+                </a>
+            </div>
+            <div class="wrap">
+                <a href="{{url_for('post', post_id=post['id'])}}">
+                    <span class="badge badge-success">Close</span>
+                </a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+
+    {% if tuple_a[1] !=0 %}
+    {% for post in range(0,tuple_a[1])%}
+    <tr>
+    <td class="gray">
+        <div class="wrap">
+            <font color="gray"> No yet </font>
+        </div>
+    </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray">  </font>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+  </div>
+
+<!-- /* 第1行，行2列 */    -->
+<div class="column color3">
+    <h2><center>Urgent, not Important</center></h2>
+<table border="1">
+    <tr>
+    <td width=280><b>Task Title</b></td>
+    <td width=540><b>Description</b></td>
+    <td width=100>
+        <b>Deal method</b>
+        <div class="wrap">
+            <a href="{{url_for('new')}}">
+                <span class="badge badge-info">New</span>
+            </a>
+        </div>
+    </td>
+    </tr>
+    {% for post in tuple_c[0] %}
+    <tr>
+        <td class="title">
+                <b> <font color="blue"> {{ post['title'] }}</font></b>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                {{ post['content'] }}
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <a href="{{url_for('edit', id=post['id'])}}">
+                   <span class="badge badge-warning">Update</span>
+                </a>
+            </div>
+            <div class="wrap">
+                <a href="{{url_for('post', post_id=post['id'])}}">
+                    <span class="badge badge-success">Close</span>
+                </a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+
+    {% if tuple_c[1] !=0 %}
+    {% for post in range(0,tuple_c[1])%}
+    <tr>
+    <td class="gray">
+        <div class="wrap">
+            <font color="gray"> No yet </font>
+        </div>
+    </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray">  </font>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+  </div>
+</div>
+<hr>
+
+<!--第2行-->
+<div class="row">
+<!--第2行，第1列-->
+<div class="column color2">
+    <h2><center>Important, not Urgent</center></h2>
+<table border="1">
+    <tr>
+    <td width=280><b>Task Title</b></td>
+    <td width=540><b>Description</b></td>
+    <td width=100>
+        <b>Deal Method</b>
+        <div class="wrap">
+            <a href="{{url_for('new')}}">
+                <span class="badge badge-info">New</span>
+            </a>
+        </div>
+    </td>
+    </tr>
+    {% for post in tuple_b[0] %}
+    <tr>
+        <td class="blue">
+            <div class="wrap">
+                <b> <font color="blue"> {{ post['title'] }}</font></b>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                {{ post['content'] }}
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <a href="{{url_for('edit', id=post['id'])}}">
+                   <span class="badge badge-warning">Update</span>
+                </a>
+            </div>
+            <div class="wrap">
+                <a href="{{url_for('post', post_id=post['id'])}}">
+                    <span class="badge badge-success">Close</span>
+                </a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+
+    {% if tuple_b[1] !=0 %}
+    {% for post in range(0,tuple_b[1])%}
+    <tr>
+    <td class="gray">
+        <div class="wrap">
+            <font color="gray"> No yet </font>
+        </div>
+    </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray">  </font>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+  </div>
+
+<!--第2行，第2列-->
+<div class="column color4">
+    <h2><center>Not Important, not Urgent</center></h2>
+<table border="1">
+    <tr>
+    <td width=280><b>Task Title</Title></b></td>
+    <td width=540><b>Description</b></td>
+    <td width=100>
+        <b>Deal Method</b>
+        <div class="wrap">
+            <a href="{{url_for('new')}}">
+                <span class="badge badge-info">New</span>
+            </a>
+        </div>
+    </td>
+    </tr>
+
+    {% for post in tuple_d[0] %}
+    <tr>
+        <td class="blue">
+            <div class="wrap">
+                <b> <font color="blue"> {{ post['title'] }}</font></b>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                {{ post['content'] }}
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <a href="{{url_for('edit', id=post['id'])}}">
+                   <span class="badge badge-warning">Update</span>
+                </a>
+            </div>
+            <div class="wrap">
+                <a href="{{url_for('post', post_id=post['id'])}}">
+                    <span class="badge badge-success">Close</span>
+                </a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+
+    {% if tuple_d[1] !=0 %}
+    {% for post in range(0,tuple_d[1])%}
+    <tr>
+    <td class="gray">
+        <div class="wrap">
+            <font color="gray"> No yet </font>
+        </div>
+    </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray">  </font>
+            </div>
+        </td>
+        <td class="cc">
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+            <div class="wrap">
+                <font color="gray"> * </font>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

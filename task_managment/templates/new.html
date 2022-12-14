@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}">
+  </head>
+
+<h1>{% block title %} <span class="badge badge-info">New Task</span> {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title-tmp"><b>Task title</b></label>
+        <input type="text" name="title-tmp" placeholder="Please input the title of new task" class="form-control">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="conten-tmp"><b>Task Contents</b></label>
+        <textarea name="conten-tmp" placeholder="Please input the contents of the new task"
+            class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="ttype-tmp"><b>Priority</b></label>
+        <select name="ttype-tmp" class="form-control"{{ request.form['ttype-tmp'] }}>
+            <option value="Important, Urgent"selected>Important, Urgent</option>
+            <option value="Important, Not Urgent">Important, Not Urgent</option>
+            <option value="Urgent, Not Important" >Urgent, Not Important</option>
+            <option value="Not Important, Not Urgent">Not Important, Not Urgent</option>
+         </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% endblock %}
